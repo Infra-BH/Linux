@@ -21,9 +21,9 @@
 # 101027
 
 
-while IFS= read -r link && IFS= read -r codigo <&3; do
+while IFS= read -r link && IFS= read -r nome <&3; do
 
-wget -c "$link" -O "$codigo".jpg
+wget -c "$link" -O "$nome".jpg
 
-done <link.txt 3<codigo.txt
+done <link.txt 3<nome.txt
 
