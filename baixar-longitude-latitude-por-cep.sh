@@ -4,6 +4,8 @@
 #----------------------------------------------
 # Esse script tem como objetivo baixar a longitude e latitude por endereço através da API do Google.
 # O script vai ler o arquivo endereco.txt, onde deve ter o ENDEREÇO linha por linha e assim entregar o resultado no arquivo outputendereco.txt
+# Exemplo arquivo endereco.txt
+# Brasil+Belo+Horizonte+Rua+Pium-i+312
 #
 # Resultado:
 # ./endereco.sh
