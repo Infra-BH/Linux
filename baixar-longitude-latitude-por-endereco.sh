@@ -2,21 +2,21 @@
 # Autor: Danilo Neves
 # E-mail: danilorpneves@outlook.com
 #----------------------------------------------
-# Esse script tem como objetivo baixar a longitude e latitude por endereço através da API do Google.
-# O script vai ler o arquivo endereco.txt, onde deve ter o ENDEREÇO linha por linha e assim entregar o resultado no arquivo outputendereco.txt
-# Exemplo arquivo endereco.txt
-# Brasil+Belo+Horizonte+Rua+Pium-i+312
+# Esse script tem como objetivo baixar a longitude e latitude por ENDERECO através da API do Google.
+# O script vai ler o arquivo endereco.txt, onde deve ter os endereços linha por linha e assim entregar o resultado no arquivo outputendereco.txt
 #
-# Resultado:
-# ./endereco.sh
-# ENDERECO: 30310080 lat -19.9389166 lng -43.9281785
+# Exemplo:
+# Rodar script: ./endereco.sh
+#
+# Resultado do script: location lat 19.919816 lng 43.9518908
 
 url01=http://maps.google.com/maps/api/geocode/json?address=
 url02=&sensor=false
-while read cep
-do
-    content=$(curl -s "{$url01}${cep}{$url02}" | grep "lat\|lng" |grep -n ^ | grep "^7:\|^8:" |cut -d: -f2,3 \
-|sed 's/,//'| sed 's/://'|  xargs -L15 )
-    echo CEP: $cep $content
-echo CEP: $cep $content >> outputendereco.txt
+sed -i "s/ /+/g" endereco.txt
+        while read cep
+                do
+                content=$(curl -s "{$url01}${cep}{$url02}" |grep -n ^ | grep -oP '\w+.\w+'  |sed '/^location/, / ^location/!d'  |head -5  |tr '\n' ' ')
+        echo $content
+        echo $cep $content >> outputendereco.txt
+        sed -i "s/+/ /g" outputendereco.txt
 done < endereco.txt
